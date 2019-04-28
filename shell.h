@@ -18,7 +18,9 @@ int builtin (char **args);
 
 int socp(int, int);
 
-/* constantes que podem tornar uteis*/
+int redirects (int numargs, char* args[]);
+
+/* constantes que podem ser uteis*/
 
 #define BG 0
 #define FG 1

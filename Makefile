@@ -16,16 +16,22 @@ all :  soshell
  
 main.o : shell.h main.c
 	$(CC) $(FLAGS) main.c
+
 execute.o : shell.h execute.c
 	$(CC) $(FLAGS) execute.c
+
 parse.o : shell.h parse.c
 	$(CC) $(FLAGS) parse.c
+
 socp.o : shell.h socp.c
 	$(CC) $(FLAGS) socp.c
+
 redirects.o : shell.h redirects.c
-	$(CC) $(FLAGS) redirects.o
+	$(CC) $(FLAGS) redirects.c
+
 soshell : $(OBS)
 	$(CC)  -o soshell  $(OBS) $(LIBS)
+	
 clean limpar:
 	rm -f soshell *.o
 	rm -f *~
