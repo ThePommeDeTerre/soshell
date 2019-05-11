@@ -28,14 +28,14 @@ int main ()
 
     numargs=parse(linha, args);	/* particiona a string em argumentos */
 
-    if (!builtin (args))
+    if (!builtin (args, numargs))
     	execute (numargs, args);		/* executa o comando */
   }
   execute(numargs, args);
   return 0;
 }
 
-int builtin (char **args)
+int builtin (char **args, int numargs)
 {
   if (strcmp (args[0], "sair") == 0)
   {
@@ -83,7 +83,7 @@ int builtin (char **args)
     return 1;
   }
 
-// implementaçã do comando embutido socp
+// implementação do comando embutido socp
   if (0==strcmp(args[0], "socp"))
   {
     int fd=open(args[1], O_RDONLY);
@@ -92,12 +92,36 @@ int builtin (char **args)
     return 1;
   }
 
+// implementação calculadora
+  if (0==strcmp(args[0], "calc") && numargs==4)
+  {
+    calc(args[1], args[2], args[3]);
+    return 1; // comando embutido
+  }
+
+// implementação da calculadora binária
+  if (0==strcmp(args[0], "bits") && numargs==4)
+  {
+    bits(args[1], args[2], args[3]);
+    return 1; // comando embutido
+  }
+
+// implementação da verificação de ficheiro isjpg
+  if (0==strcmp(args[0], "isjpg") && (numargs==2))
+  {
+    printf("%d\n", isjpg(*args[1]));
+    return 1;
+  }
+
 /*
-  if (strcmp (args[0], "qualquercoisa") == 0) {
+  if (strcmp (args[0], "qualquercoisa") == 0) 
+  {
        funcionalidade();
        return 1;
-    }
-   if ( strcmp(args[0],"socp")==0) {
+  }
+
+   if ( strcmp(args[0],"socp")==0) 
+   {
      socp( args[1], args[2]);
      return 1;
    }

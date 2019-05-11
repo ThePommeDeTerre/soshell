@@ -9,7 +9,7 @@
 CC=cc
 FLAGS=-c -Wall
 LIBS=-lm
-OBS=main.o execute.o parse.o socp.o redirects.o
+OBS=main.o execute.o parse.o socp.o redirects.o calc.o
  
 #Alvo por defeito é o primeiro 
 all :  soshell
@@ -28,6 +28,9 @@ socp.o : shell.h socp.c
 
 redirects.o : shell.h redirects.c
 	$(CC) $(FLAGS) redirects.c
+
+calc.o	:	shell.h	calc.c
+	$(CC)	$(FLAGS)	calc.c
 
 soshell : $(OBS)
 	$(CC)  -o soshell  $(OBS) $(LIBS)
