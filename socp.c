@@ -18,3 +18,11 @@ int socp(int in, int out) {
 
     return 0;
 }
+
+void* socpth(void* args)
+{
+    copiar_t* ptr=(copiar_t*)args;
+    socp(ptr->in, ptr->out);
+    free(ptr);
+    return NULL;
+}

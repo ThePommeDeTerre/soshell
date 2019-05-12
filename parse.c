@@ -6,7 +6,8 @@
 
 int parse (char *buf, char **args)
 {
-  int cnt=0;  /* inicializa o número de argumentos */
+  /* inicializa o número de argumentos */
+  int cnt=0;
   while ('\0' != *buf)
   {
     /* strip whitespace. Usa um NULL para indicar que o argumento anterior e. o ultimo */

@@ -113,6 +113,53 @@ int builtin (char **args, int numargs)
     return 1;
   }
 
+  // implementação aviso de teste
+  if(strcmp(args[0], "avisoTeste")==0)
+  {
+    aviso(args[1], atoi(args[2]));
+    return 1;
+  }
+
+  // implementação aviso com Threads
+  if(strcmp(args[0], "aviso")==0)
+  {
+    pthread_t th;
+
+    pthread_create(&th, NULL, avisowrapper, (void*)args);
+    pthread_join(th, NULL);
+
+    return 1;
+  }
+
+  // passar argumentos com estrutura
+  if(strcmp(args[0], "avisoEs")==0)
+  {
+    pthread_t th;
+    aviso_t* ptr = (aviso_t*)malloc(sizeof(aviso_t));
+
+    strcpy(ptr->msg, args[1]);
+    ptr->tempo=atoi(args[2]);
+
+    pthread_create(&th, NULL, avisowrapperEs, (void*)ptr);
+    pthread_join(th, NULL);
+
+    return 1;
+  }
+
+  if(strcmp(args[0], "socpth")==0)
+  {
+    pthread_t th;
+    copiar_t* ptr = (copiar_t*)malloc(sizeof(copiar_t));
+
+    ptr->in=open(args[1], O_RDONLY);
+    ptr->out=open(args[2], O_CREAT | O_WRONLY);
+
+    pthread_create(&th, NULL, socpth, (void*)ptr);
+    pthread_join(th, NULL);
+
+    return 1;
+  }  
+
 /*
   if (strcmp (args[0], "qualquercoisa") == 0) 
   {

@@ -31,7 +31,7 @@ int redirects (int numargs, char* args[])
 
 	if (strcmp(args[numargs-2], ">>") == 0)
 	{
-		int fd=creat(args[numargs-1], O_WRONLY | O_APPEND);
+		int fd=open(args[numargs-1], O_WRONLY | O_APPEND);
 		if (fd < 0)
 		{
 			perror(NULL);
@@ -49,7 +49,7 @@ int redirects (int numargs, char* args[])
 
 	if(strcmp(args[numargs-2], "<") == 0)
 	{
-		int fd=creat(args[numargs-1], O_RDONLY);
+		int fd=open(args[numargs-1], O_RDONLY);
 		if (fd < 0)
 		{
 			perror(NULL);
@@ -61,6 +61,7 @@ int redirects (int numargs, char* args[])
 		numargs=numargs-2;
 	}	
 
+	// tratar do 2> open: S_IRUSR
 	if (numargs < 3)
 		return numargs;
 
