@@ -24,5 +24,6 @@ void* socpth(void* args)
     copiar_t* ptr=(copiar_t*)args;
     socp(ptr->in, ptr->out);
     free(ptr);
+    pthread_exit(NULL);
     return NULL;
 }

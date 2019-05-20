@@ -120,13 +120,12 @@ int builtin (char **args, int numargs)
     return 1;
   }
 
-  // implementação aviso com Threads
+  // implementação aviso com Threads ---> ERRADO
   if(strcmp(args[0], "aviso")==0)
   {
     pthread_t th;
 
     pthread_create(&th, NULL, avisowrapper, (void*)args);
-    pthread_join(th, NULL);
 
     return 1;
   }
@@ -141,7 +140,6 @@ int builtin (char **args, int numargs)
     ptr->tempo=atoi(args[2]);
 
     pthread_create(&th, NULL, avisowrapperEs, (void*)ptr);
-    pthread_join(th, NULL);
 
     return 1;
   }
@@ -155,7 +153,6 @@ int builtin (char **args, int numargs)
     ptr->out=open(args[2], O_CREAT | O_WRONLY);
 
     pthread_create(&th, NULL, socpth, (void*)ptr);
-    pthread_join(th, NULL);
 
     return 1;
   }  
